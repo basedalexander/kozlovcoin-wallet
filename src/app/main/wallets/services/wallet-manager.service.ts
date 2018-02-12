@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+
 import { WalletStorage } from 'app/main/wallets/services/wallet-storage';
-import { IKeyPair, IDetailedWallet, ITransaction } from 'app/main/wallets/services/wallet.interfaces';
+import { IKeyPair, IWalletDetailsObject, ITransaction, IStoredWalletData } from 'app/main/wallets/services/wallet.interfaces';
 import { WalletDataProvider } from '@app/main/wallets/services/wallet-data-provider';
+import { StoredWallet } from '@app/main/wallets/stored-wallet';
+import { WalletDetailsObject } from '@app/main/wallets/wallet-details';
 
 @Injectable()
 export class WalletManagerService {
@@ -9,34 +12,60 @@ export class WalletManagerService {
               private walletDataProvider: WalletDataProvider) {
   }
 
-  async generateNew(): Promise<IDetailedWallet> {
+  async generateNew(): Promise<IWalletDetailsObject> {
     const keyPair: IKeyPair = await this.walletDataProvider.generateWallet();
 
-    return {
-      name: 'New wallet',
-      publicKey: keyPair.publicKey,
-      privateKey: keyPair.privateKey,
-      balance: 0,
-      transactions: []
-    }
+    return new WalletDetailsObject(
+      'Generated wallet',
+      keyPair.publicKey,
+      keyPair.privateKey,
+      0,
+      []
+    );
   }
 
-  async getAll(): Promise<IDetailedWallet[]> {
-    const genesisWallet: IDetailedWallet = await this.getGenesis();
-    return [genesisWallet];
+  async store(wallets: IWalletDetailsObject[]): Promise<void> {
+    const walletsToStore: IWalletDetailsObject[] = wallets.slice(1);
+    const storageFormats: IStoredWalletData[] = walletsToStore.map(w => new StoredWallet(w.name, w.publicKey, w.privateKey));
+    await this.walletStorage.set(storageFormats);
   }
 
-  private async getGenesis(): Promise<IDetailedWallet> {
-    const genesisKeyPair: IKeyPair = await this.walletDataProvider.getGenesisWallet();
-    const balance: number = await this.walletDataProvider.getBalance(genesisKeyPair);
-    const transactions: ITransaction[] = await this.walletDataProvider.getTransactions(genesisKeyPair);
+  async getAll(): Promise<IWalletDetailsObject[]> {
+    const genesisWallet: IWalletDetailsObject = await this.getGenesisWallet();
+    const storedWallets: IWalletDetailsObject[] = await this.getStored();
+    return [genesisWallet, ...storedWallets];
+  }
 
-    return {
-      name: 'Genesis wallet',
-      publicKey: genesisKeyPair.publicKey,
-      privateKey: genesisKeyPair.privateKey,
+  private async getGenesisWallet(): Promise<IWalletDetailsObject> {
+    const keyPair: IKeyPair = await this.walletDataProvider.getGenesisWallet();
+    const balance: number = await this.walletDataProvider.getBalance(keyPair);
+    const transactions: ITransaction[] = await this.walletDataProvider.getTransactions(keyPair);
+
+    return new WalletDetailsObject('Genesis wallet', keyPair.publicKey, keyPair.privateKey, balance, transactions);
+  }
+
+  private async getStored(): Promise<IWalletDetailsObject[]> {
+    const storedWallets: IStoredWalletData[] = await this.walletStorage.get();
+    const promises = storedWallets.map(async wallet => this.storedWalletToWalletDetailsObject(wallet));
+    const detailedWallets: IWalletDetailsObject[] = await Promise.all(promises);
+
+    return detailedWallets;
+  }
+
+  private async storedWalletToWalletDetailsObject(storedWallet: IStoredWalletData): Promise<IWalletDetailsObject> {
+    const balance: number = await this.walletDataProvider.getBalance(storedWallet);
+    const transactions: ITransaction[] = await this.walletDataProvider.getTransactions(storedWallet);
+
+    return new WalletDetailsObject(
+      storedWallet.name,
+      storedWallet.publicKey,
+      storedWallet.privateKey,
       balance,
       transactions
-    }
+    );
+  }
+
+  private convertDetailedWalletsToStored(wallets: IWalletDetailsObject[]): IStoredWalletData[] {
+    return wallets.map(w => new StoredWallet(w.name, w.publicKey, w.privateKey));
   }
 }

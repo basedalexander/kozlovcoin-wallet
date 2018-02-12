@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { IDetailedWallet } from '@app/main/wallets/services/wallet.interfaces';
+import { IWalletDetailsObject } from '@app/main/wallets/services/wallet.interfaces';
 
 @Component({
   selector: 'anms-wallet-preview',
@@ -7,5 +7,5 @@ import { IDetailedWallet } from '@app/main/wallets/services/wallet.interfaces';
   styleUrls: ['./wallet-preview.component.scss']
 })
 export class WalletPreviewComponent {
-  @Input() wallet: IDetailedWallet;
+  @Input() wallet: IWalletDetailsObject;
 }

@@ -1,3 +1,21 @@
 <div class="send-coins-container">
+  <form>
+    <mat-form-field>
+      <mat-select placeholder="Wallet" [(ngModel)]="from" name="food">
+        <mat-option *ngFor="let wallet of wallets" [value]="wallet.publicKey">
+          {{wallet.name}} {{wallet?.publicKey | slice:0:10}} {{wallet?.balance}}KZC
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="To address" #recipientKey type="string">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Amount" #amount type="number">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="onTransactionSubmit()">Send</button>
+  </form>
 </div>

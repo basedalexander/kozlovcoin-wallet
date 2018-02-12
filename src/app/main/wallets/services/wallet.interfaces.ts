@@ -1,4 +1,4 @@
-export interface IDetailedWallet {
+export interface IWalletDetailsObject {
   name: string;
   publicKey: string;
   privateKey: string;

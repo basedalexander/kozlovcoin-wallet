@@ -1,4 +1,6 @@
 <div class="wallets-container">
+    <button mat-raised-button (click)="onGenerateNewClick()">Generate new</button>
+
     <ul>
       <li *ngFor="let wallet of wallets">
         <anms-wallet-preview

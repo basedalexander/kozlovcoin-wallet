@@ -11,7 +11,7 @@ import { SendComponent } from '@app/main/send/send.component';
 import { MainComponent } from '@app/main/main-component/main.component';
 import { WalletPreviewComponent } from '@app/main/wallets/wallet-preview/wallet-preview.component';
 import { WalletManagerService } from '@app/main/wallets/services/wallet-manager.service';
-import { WalletDataProvider } from '@app/main/wallets/services/wallet-data-provider';
+import { WalletApi } from '@app/main/wallets/services/wallet-data-provider';
 import { WalletStorage } from '@app/main/wallets/services/wallet-storage';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { WalletStorage } from '@app/main/wallets/services/wallet-storage';
     SendComponent
   ],
   providers: [
-    WalletDataProvider,
+    WalletApi,
     WalletStorage,
     WalletManagerService
   ]

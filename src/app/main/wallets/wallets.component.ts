@@ -30,10 +30,10 @@ export class WalletsComponent implements OnDestroy {
   }
 
   private async loadWallets() {
-    this.wallets = await this.walletManager.getAll();
+    this.wallets = await this.walletManager.getWallets();
   }
 
   private async store(): Promise<void> {
-    await this.walletManager.store(this.wallets);
+    await this.walletManager.storeWallets(this.wallets);
   }
 }

@@ -10,7 +10,7 @@ import { routerTransition } from '@app/core';
 })
 export class MainComponent implements OnInit {
   main = [
-    { link: 'wallets', label: 'Wallets' },
+    { link: 'storedWallets', label: 'Wallets' },
     { link: 'send', label: 'Send' }
   ];
 

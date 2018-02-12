@@ -1,1 +1,9 @@
-wallets component
+<div class="wallets-container">
+    <ul>
+      <li *ngFor="let wallet of wallets">
+        <anms-wallet-preview
+          [wallet]="wallet">
+        </anms-wallet-preview>
+      </li>
+    </ul>
+</div>

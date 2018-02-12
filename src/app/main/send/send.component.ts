@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ANIMATE_ON_ROUTE_ENTER } from '@app/core';
+import { IDetailedWallet } from '@app/main/wallets/services/wallet.interfaces';
 
 @Component({
   selector: 'anms-send',
@@ -8,4 +9,5 @@ import { ANIMATE_ON_ROUTE_ENTER } from '@app/core';
 })
 export class SendComponent {
   animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
+  @Input() wallets: IDetailedWallet[];
 }

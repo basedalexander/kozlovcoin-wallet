@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {MainComponent} from '@app/main/main-component/main.component';
-import {WalletsComponent} from '@app/main/wallets/wallets.component';
-import {SendComponent} from '@app/main/send/send.component';
+import { MainComponent } from '@app/main/main-component/main.component';
+import { WalletsComponent } from '@app/main/wallets/wallets.component';
+import { SendComponent } from '@app/main/send/send.component';
 
 const routes: Routes = [
   {
@@ -11,14 +11,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'wallets',
+        redirectTo: 'storedWallets',
         pathMatch: 'full'
       },
       {
-        path: 'wallets',
+        path: 'storedWallets',
         component: WalletsComponent,
         data: {
-          title: 'Your wallets'
+          title: 'Your storedWallets'
         }
       },
       {
@@ -36,4 +36,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MainRoutingModule {}
+export class MainRoutingModule {
+}

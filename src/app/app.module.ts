@@ -10,6 +10,7 @@ import { StaticModule } from './static';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ApiModule } from '@app/api/api.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,9 @@ import { AppComponent } from './app.component';
     SettingsModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+
+    ApiModule
   ],
   declarations: [AppComponent],
   providers: [],

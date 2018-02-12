@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import { WalletStorage } from 'app/main/wallets/services/wallet-storage';
-import { IKeyPair, IWalletDetailsObject, ITransaction, IStoredWalletData } from 'app/main/wallets/services/wallet.interfaces';
+import {
+  IKeyPair,
+  IWalletDetailsObject,
+  ITransaction,
+  IStoredWalletData
+} from 'app/main/wallets/services/wallet.interfaces';
 import { WalletApi } from '@app/main/wallets/services/wallet-data-provider';
 import { StoredWallet } from '@app/main/wallets/stored-wallet';
 import { WalletDetailsObject } from '@app/main/wallets/wallet-details';
 import { TransactionSendDetails } from '@app/main/wallets/services/send-transaction-details';
+import { ITransactionReport } from '@app/main/wallets/services/transaction-report';
 
 @Injectable()
 export class WalletManagerService {
@@ -39,6 +45,10 @@ export class WalletManagerService {
     const genesisWallet: IWalletDetailsObject = await this.getGenesisWallet();
     const storedWallets: IWalletDetailsObject[] = await this.getStored();
     return [genesisWallet, ...storedWallets];
+  }
+
+  public async getTransactionsForWallets(wallets: IWalletDetailsObject[]): Promise<ITransactionReport[]> {
+    return await this.walletApi.getTransactionsForWallets(wallets);
   }
 
   private async getGenesisWallet(): Promise<IWalletDetailsObject> {

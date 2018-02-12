@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiRequest } from 'app/api/api-request';
 import { IKeyPair, ITransaction } from '@app/main/wallets/services/wallet.interfaces';
 import { TransactionSendDetails } from '@app/main/wallets/services/send-transaction-details';
+import { transactionsReportsMockedDataset } from '@app/main/wallets/transactioins-mock-data';
+import { ITransactionReport } from '@app/main/wallets/services/transaction-report';
 
 @Injectable()
 export class WalletApi {
@@ -26,18 +28,15 @@ export class WalletApi {
     return await this.api.get(`wallet/balance/${wallet.publicKey}`);
   }
 
-  public async getTransactions(wallet: IKeyPair): Promise<ITransaction[]> {
-    return await this.api.get(`wallet/transactions/${wallet.publicKey}`);
+  public async getTransactions(wallet: IKeyPair): Promise<ITransactionReport[]> {
+    // return await this.api.get(`wallet/transactions/${wallet.publicKey}`);
+    return transactionsReportsMockedDataset; // todo mocked till endpoint is ready
   }
 
-  public async getTransactionsForMany(wallets: IKeyPair[]): Promise<ITransaction[]> {
-    let allTransactions: ITransaction[] = [];
-
-    wallets.forEach(async wallet => {
-      const walletTransactions: ITransaction[] = await this.getTransactions(wallet);
-      allTransactions = allTransactions.concat(walletTransactions);
-    });
-
-    return allTransactions;
+  public async getTransactionsForWallets(wallets: IKeyPair[]): Promise<ITransactionReport[]> {
+    const promises = wallets.map(w => this.getTransactions(w));
+    const accumulatedTransactions: ITransactionReport[][] = await Promise.all(promises);
+    const result: ITransactionReport[] = accumulatedTransactions.reduce((a, b) => a.concat(b), []);
+    return result;
   }
 }

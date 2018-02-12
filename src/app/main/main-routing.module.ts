@@ -11,14 +11,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'storedWallets',
+        redirectTo: 'wallets',
         pathMatch: 'full'
       },
       {
-        path: 'storedWallets',
+        path: 'wallets',
         component: WalletsComponent,
         data: {
-          title: 'Your storedWallets'
+          title: 'Wallets'
         }
       },
       {

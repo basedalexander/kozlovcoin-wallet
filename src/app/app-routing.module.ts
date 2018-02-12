@@ -1,20 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SettingsComponent } from './settings';
-
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'main',
     pathMatch: 'full'
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    data: {
-      title: 'Settings'
-    }
   },
   {
     path: 'main',

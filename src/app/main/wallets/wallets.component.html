@@ -1,18 +1,11 @@
 <div class="wallets-container">
-    <button mat-raised-button (click)="onGenerateNewClick()">Generate new</button>
 
-    <ul>
-      <li *ngFor="let wallet of wallets">
-        <anms-wallet-preview
-          [wallet]="wallet">
-        </anms-wallet-preview>
-      </li>
-    </ul>
+  <div class="wallets-list-block">
+    <anms-wallets-list [wallets]="wallets" (generateNewClick)="onGenerateNewClick()"></anms-wallets-list>
+  </div>
 
+  <div class="transactions-history-block">
+    <anms-transactions-list [transactions]="transactions"></anms-transactions-list>
+  </div>
 
-  <hr>
-
-  <ul>
-    <li *ngFor="let tx of transactions">tx {{tx.id}}</li>
-  </ul>
 </div>

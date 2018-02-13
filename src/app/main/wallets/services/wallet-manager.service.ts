@@ -7,7 +7,7 @@ import {
   ITransaction,
   IStoredWalletData
 } from 'app/main/wallets/services/wallet.interfaces';
-import { WalletApi } from '@app/main/wallets/services/wallet-data-provider';
+import { WalletDataProvider } from '@app/main/wallets/services/wallet-data-provider';
 import { StoredWallet } from '@app/main/wallets/stored-wallet';
 import { WalletDetailsObject } from '@app/main/wallets/wallet-details';
 import { TransactionSendDetails } from '@app/main/wallets/services/send-transaction-details';
@@ -16,7 +16,7 @@ import { ITransactionReport } from '@app/main/wallets/services/transaction-repor
 @Injectable()
 export class WalletManagerService {
   constructor(private walletStorage: WalletStorage,
-              private walletApi: WalletApi) {
+              private walletApi: WalletDataProvider) {
   }
 
   public async sendTransaction(transactionDetails: TransactionSendDetails): Promise<void> {
@@ -37,6 +37,10 @@ export class WalletManagerService {
 
   public async storeWallets(wallets: IWalletDetailsObject[]): Promise<void> {
     const walletsToStore: IWalletDetailsObject[] = wallets.slice(1);
+
+    if (walletsToStore.length) {
+      return;
+    }
     const storageFormats: IStoredWalletData[] = walletsToStore.map(w => new StoredWallet(w.name, w.publicKey, w.privateKey));
     await this.walletStorage.set(storageFormats);
   }
@@ -48,7 +52,9 @@ export class WalletManagerService {
   }
 
   public async getTransactionsForWallets(wallets: IWalletDetailsObject[]): Promise<ITransactionReport[]> {
-    return await this.walletApi.getTransactionsForWallets(wallets);
+    const result = await this.walletApi.getTransactionsForWallets(wallets);
+    const sortedResult = result.sort((a, b) => b.timeStamp - a.timeStamp);
+    return sortedResult;
   }
 
   private async getGenesisWallet(): Promise<IWalletDetailsObject> {

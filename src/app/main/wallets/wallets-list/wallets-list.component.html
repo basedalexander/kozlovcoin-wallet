@@ -1,0 +1,24 @@
+<div class="wallet-preview-component">
+
+  <ul class="wallets-list">
+    <li class="wallets-list-item">
+      <h3>Your wallets</h3>
+    </li>
+
+    <li *ngFor="let wallet of wallets" class="wallets-list-item">
+      <mat-card>
+        <mat-card-title class=""><span class="wallet-preview-title">{{wallet?.name}}</span></mat-card-title>
+
+        <mat-card-content>{{wallet?.balance}} KZC</mat-card-content>
+
+        <mat-card-subtitle><span class="wallet-address-text">{{wallet?.publicKey}}</span></mat-card-subtitle>
+      </mat-card>
+    </li>
+
+    <li class="wallets-list-item">
+      <button mat-raised-button (click)="onGenerateNewClick()">Generate new</button>
+    </li>
+  </ul>
+
+</div>
+

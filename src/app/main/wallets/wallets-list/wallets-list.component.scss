@@ -1,0 +1,32 @@
+.wallets-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.wallets-list-item {
+  margin-bottom: 10px;
+}
+
+mat-card {
+  padding: 15px;
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-title {
+  margin-bottom: 4px;
+}
+
+.wallet-address-text {
+  font-size: 10px;
+  overflow-wrap: break-word;
+}
+
+.wallet-preview-title {
+  font-size: 22px;
+}
+
+.wallet-preview-content {
+  font-size: 13px;
+}
+
+

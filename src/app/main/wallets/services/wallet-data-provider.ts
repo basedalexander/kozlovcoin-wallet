@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiRequest } from 'app/api/api-request';
-import { IKeyPair, ITransaction } from '@app/main/wallets/services/wallet.interfaces';
+import { IKeyPair } from '@app/main/wallets/services/wallet.interfaces';
 import { TransactionSendDetails } from '@app/main/wallets/services/send-transaction-details';
-import { transactionsReportsMockedDataset } from '@app/main/wallets/transactioins-mock-data';
 import { ITransactionReport } from '@app/main/wallets/services/transaction-report';
 
 @Injectable()
-export class WalletApi {
+export class WalletDataProvider {
 
   constructor(private api: ApiRequest) {
-
   }
 
   public async sendTransaction(details: TransactionSendDetails): Promise<void> {
@@ -29,8 +27,7 @@ export class WalletApi {
   }
 
   public async getTransactions(wallet: IKeyPair): Promise<ITransactionReport[]> {
-    // return await this.api.get(`wallet/transactions/${wallet.publicKey}`);
-    return transactionsReportsMockedDataset; // todo mocked till endpoint is ready
+     return await this.api.get(`wallet/transactions/${wallet.publicKey}`);
   }
 
   public async getTransactionsForWallets(wallets: IKeyPair[]): Promise<ITransactionReport[]> {

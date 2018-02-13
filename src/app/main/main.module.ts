@@ -9,10 +9,11 @@ import { ChildComponent } from './theming/child/child.component';
 import { WalletsComponent } from '@app/main/wallets/wallets.component';
 import { SendComponent } from '@app/main/send/send.component';
 import { MainComponent } from '@app/main/main-component/main.component';
-import { WalletPreviewComponent } from '@app/main/wallets/wallet-preview/wallet-preview.component';
 import { WalletManagerService } from '@app/main/wallets/services/wallet-manager.service';
-import { WalletApi } from '@app/main/wallets/services/wallet-data-provider';
+import { WalletDataProvider } from '@app/main/wallets/services/wallet-data-provider';
 import { WalletStorage } from '@app/main/wallets/services/wallet-storage';
+import { WalletsListComponent } from '@app/main/wallets/wallets-list/wallets-list.component';
+import { TransactionsListComponent } from '@app/main/wallets/transactions-list/transactions-list.component';
 
 @NgModule({
   imports: [
@@ -25,11 +26,12 @@ import { WalletStorage } from '@app/main/wallets/services/wallet-storage';
     ChildComponent,
     MainComponent,
     WalletsComponent,
-    WalletPreviewComponent,
+    WalletsListComponent,
+    TransactionsListComponent,
     SendComponent
   ],
   providers: [
-    WalletApi,
+    WalletDataProvider,
     WalletStorage,
     WalletManagerService
   ]

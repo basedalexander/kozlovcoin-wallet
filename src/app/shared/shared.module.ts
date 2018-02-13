@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { BigInputComponent } from './big-input/big-input.component';
 import { BigInputActionComponent } from './big-input/big-input-action.component';
+import { MatExpansionModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { BigInputActionComponent } from './big-input/big-input-action.component'
     MatListModule,
     MatMenuModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   declarations: [BigInputComponent, BigInputActionComponent],
   exports: [
@@ -59,6 +61,7 @@ import { BigInputActionComponent } from './big-input/big-input-action.component'
     MatToolbarModule,
     MatIconModule,
     MatTooltipModule,
+    MatExpansionModule,
 
     BigInputComponent,
     BigInputActionComponent

@@ -1,0 +1,29 @@
+<div class="wallet-preview-component">
+
+  <ul class="wallets-list">
+
+    <li class="wallets-list-item">
+        <h3>Transaction History</h3>
+    </li>
+
+    <li *ngFor="let tx of transactions" class="wallets-list-item">
+      <mat-card [class.muted]="!tx.confirmed">
+        <mat-card-subtitle>
+          <span class="tx-date-text">{{tx?.timeStamp | date}} {{tx?.timeStamp | date:'shortTime'}}</span>
+
+          <span class="tx-from-tx" *ngIf="tx.from.length">{{tx.from | slice:0:12}}...</span>
+          <span class="tx-from-tx" *ngIf="!tx.from.length"><strong>coinbase</strong></span>
+          -->
+          <span class="tx-to-tx">{{tx.to | slice:0:12}}...</span>
+
+          <span *ngIf='tx.type === 0' class="tx-amount-text float-right text-success"> +{{tx.amount + ' KZC'}}</span>
+          <span *ngIf='tx.type === 1' class="tx-amount-text float-right text-danger"> -{{tx.amount + ' KZC'}}</span>
+
+          <span *ngIf='!tx.confirmed' class="text-warning float-right inconfirmed-hint-text">uncomfirmed </span>
+        </mat-card-subtitle>
+      </mat-card>
+    </li>
+  </ul>
+
+</div>
+

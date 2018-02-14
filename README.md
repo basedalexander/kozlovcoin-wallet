@@ -22,7 +22,7 @@ docker run -d -p 8080:8080 --name kozlovcoin-wallet thohoh/kozlovcoin-wallet
 ```
 
 #### Open in your browser: 
-[http://localhost:8080](http://localhost:8080/)
+[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 1. Blocks are mined every 10 seconds.
 2. No backend for client, key pairs are stored in local storage.

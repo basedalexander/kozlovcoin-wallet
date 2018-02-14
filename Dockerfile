@@ -17,5 +17,4 @@ RUN cd /app && npm install
 
 EXPOSE 8080
 
-WORKDIR /app
-CMD npm start
+CMD cd /app && npm run prod

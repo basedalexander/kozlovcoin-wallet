@@ -16,10 +16,13 @@
 
     <mat-form-field class="full-width send-form-input">
       <input matInput placeholder="Amount" #amount type="number">
-      <mat-spinner *ngIf="sending"></mat-spinner>
     </mat-form-field>
 
-    <button mat-raised-button (click)="onTransactionSubmit(from.value, to.value, amount.value)">Send</button>
+    <button mat-raised-button class='send-button' (click)="onTransactionSubmit(from.value, to.value, amount.value)">
+      Send
+
+      <mat-spinner *ngIf="sending" [diameter]="15"></mat-spinner>
+    </button>
 
   </form>
 </div>

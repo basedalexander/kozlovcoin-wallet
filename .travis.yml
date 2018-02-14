@@ -10,8 +10,8 @@ script:
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD";
-    docker build -t kozlovcoin . ;
-    docker tag kozlovcoin $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
+    docker build -t kozlovcoin-wallet . ;
+    docker tag kozlovcoin-wallet $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
     docker push $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
   fi
 env:

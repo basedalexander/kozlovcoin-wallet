@@ -23,7 +23,7 @@ export class SendComponent {
     this.sending = false;
   }
 
-  protected onTransactionSubmit(from: string, to: string, amount: number): void {
+  onTransactionSubmit(from: string, to: string, amount: number): void {
     const txDetails: TransactionSendDetails = this.createTxDetails(from, to, +amount);
     this.showSendingSpinner();
     this.sendTransaction(txDetails);

@@ -1,18 +1,29 @@
 # Kozlovcoin Wallet
 
+### Kozlovcoin browser client. Blockchain node is here: [kozlovcoin](https://github.com/thohoh/kozlovcoin)
 
-## Install and launch
+[![Build Status](https://travis-ci.org/thohoh/kozlovcoin-wallet.svg?branch=master)](https://travis-ci.org/thohoh/kozlovcoin-wallet)
+
+### Instructions:
+
+#### 1) Install and run blockchain node from this [repository](https://github.com/thohoh/kozlovcoin)
+
+#### 2) Install and run client:
 ```bash
-git clone https://github.com/tomastrajan/angular-ngrx-material-starter.git new-project
-cd new-project
-npm install
-npm run prod
+git clone https://github.com/thohoh/kozlovcoin-wallet
+cd kozlovcoin-wallet
+npm i 
+npm start
 ```
 
-## Commands
-  * `npm start` - starts a dev server and opens browser with running app
-  * `npm run test` - runs lint and tests
-  * `npm run watch` - runs tests in watch mode
-  * `npm run prod` - runs full prod build and serves prod bundle
-  * `npm run prettier` - runs prettier to format whole code base (`.ts` and `.scss`) 
-  * `npm run analyze` - runs full prod build and `webpack-bundle-analyzer` to visualize how much code is shipped (dependencies & application) 
+#### Or with docker
+```
+docker run -d -p 8080:8080 --name kozlovcoin-wallet thohoh/kozlovcoin-wallet
+```
+
+#### Open in your browser: 
+[http://localhost:8080](http://localhost:8080/)
+
+1. Blocks are mined every 10 seconds.
+2. No backend for client, key pairs are stored in local storage.
+3. Client expects Node API to be available on port 3008.

@@ -10,7 +10,7 @@ export class WalletsListComponent {
   @Input() wallets: IWalletDetailsObject[];
   @Output() private generateNewClick: EventEmitter<void> = new EventEmitter();
 
-  protected onGenerateNewClick(): void {
+  onGenerateNewClick(): void {
     this.generateNewClick.emit();
   }
 }

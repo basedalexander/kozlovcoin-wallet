@@ -27,7 +27,7 @@ export class WalletsComponent implements OnDestroy {
     this.store();
   }
 
-  protected onGenerateNewClick() {
+  onGenerateNewClick() {
     this.generateAndAddNewWallet();
   }
 

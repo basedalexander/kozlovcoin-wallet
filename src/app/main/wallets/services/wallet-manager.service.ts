@@ -38,9 +38,10 @@ export class WalletManagerService {
   public async storeWallets(wallets: IWalletDetailsObject[]): Promise<void> {
     const walletsToStore: IWalletDetailsObject[] = wallets.slice(1);
 
-    if (walletsToStore.length) {
+    if (walletsToStore.length === 0) {
       return;
     }
+
     const storageFormats: IStoredWalletData[] = walletsToStore.map(w => new StoredWallet(w.name, w.publicKey, w.privateKey));
     await this.walletStorage.set(storageFormats);
   }

@@ -7,12 +7,22 @@ services:
 script:
 - npm install
 - npm run lint
+- npm build:prod
+
+deploy:
+  provider: s3
+  access_key_id:
+    secure: P7Do0LlH/rf2orC7O1ZnwhutXtryNafFz4PjpRRI8XGq7CUNabGofnCGpIL8+qctbtJaMd1Iok7Bty44lW2NiGO0J/dVz6t2j83Hmg0jU7CuvhKeCDgfFCb70U9gKulRQ6wDgvqilW4BreWqQDeyEi0D/q2NzsynlOUbxcFOXN2lBknkF8eyYxuqtb7evU4EO7KW7wpGLztKLOmLoSMEX5s2DUea5T3KuJHHRCf0+de/tajj2eWGzi15kmYIbddGgxEn2yDNPVnQ+kvK4SzcfY61bpJuTWeI7mX5MLnDOcsWKPuLotMXbA9YCoC7StqDXlmwqx17s2lTbcO1uswtDNRvocmU2zuoea66LP513fBgvfMan5/pHuSSY4f2LJa6woEEXFRnHPxJn4foK028QWK19PjbjadI9hqHK/GbFgiKNuQ4asawfFyzCmytc2bPWymwzYVDJymepGNxaijTAjuZdWVrHI9jujKGOxbdgnf5odcD6PT9YmhGkfFIqsYJ9GX3qbi5cfL7+2rT35RX4nfg9RSrGHWT9oOGrBobqVJgLBz/o96CKM0kidCP112ycLIbM3DcO2ivuUIJEtcXgdRHx5mNYVU4dpskrOEzah6/Uq8FPwtPfVBTTgwl11CO/df3gVQhu1Cs4zfJ6f4tAYvKZ97ntW/XzyzScQFU/h0=
+  secret_access_key:
+    secure: xdh71XoHnVnNFW7TfnvQMbXPKXbWbiDQRtGqvYi2U0HfUToet121tvjyFhbjgCugMuhlYSassUgOUQ0Bvw17CGHICOS42CDvFotAdp031Btz1MR6h/bOO4Edcjp746Yg4YmY7cgUADbl12HTfuZaRYxQDoxdzi9CpUzKwX5v5PzK3qUOhHrzgwueBefcnJ8uWkMV/d8z7sbfTfx3kk77quWbyHHOCrfDhhwCgwPEdX/Mb4sT8CkZBUa4CswkFq45qhCOE1Vgyy306my8UGrJbcfGjq88rf962AqahGLdWfF9uWZm1J4rI0YzMCJUUQTIGXfo27zqJx4Jr+1BO6y8ffkJXsLmV2rgjES2wqTftALqcqgiUHq1NZOl4rMr86NUVqifCKcgoxnN06RcTm+XCpOgYi9iVS+n7xqvQ/fuiy/MI0cl4MfwJibVA8DBYgNP0voYswiYT5gyjp3ZtBoRGvKeVT5IkHhNdMr73K8Rtc5QFzuizGKUr33MC8EjZl8aQaAWSEebXBjtpUjgRVdCj7O44DuHginZ1vfD+BBLVI+hb+/k1l5emidMSQwr3JOqhdlERvcTmJRxKOa8CWfuWOT5CLS8hAx90W3FJ8ak6TuN3++U0p+ayxtHmMCz9EfPo7JEQJo1M6pTt6yWgy/n3aFLPvdUry9wGenuZwONRBk=
+  bucket: wallet-bucket
+  skip_cleanup: true
+  local_dir: dist
+
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD";
-    docker build -t kozlovcoin-wallet . ;
-    docker tag kozlovcoin-wallet $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
-    docker push $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u "$DOCKERHUB_USERNAME"
+  -p "$DOCKERHUB_PASSWORD"; docker build -t kozlovcoin-wallet . ; docker tag kozlovcoin-wallet
+  $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest; docker push $DOCKERHUB_USERNAME/kozlovcoin-wallet:latest;
   fi
 env:
   gobal:

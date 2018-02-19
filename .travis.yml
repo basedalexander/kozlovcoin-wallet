@@ -7,7 +7,6 @@ services:
 script:
 - npm install
 - npm run lint
-- npm build:prod
 
 deploy:
   provider: s3

@@ -4,8 +4,6 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class ApiRequest {
 
-    private url = 'http://localhost:3008';
-
     constructor(private http: Http) { }
 
     public async get(endpoint: string): Promise<any> {
@@ -37,6 +35,7 @@ export class ApiRequest {
     }
 
     private makeUrl(endpoint: string): string {
-        return `${this.url}/${endpoint}`;
+        const origin: string = location.origin;
+        return `${origin}/api/${endpoint}`;
     }
 }

@@ -1,6 +1,6 @@
 # Kozlovcoin Wallet
 
-### Demo [http://thohoh.pro](http://thohoh.pro)
+### Demo [https://kozlovcoin.thohoh.pro](https://kozlovcoin.thohoh.pro)
 
 ### Blockchain node api repo: [https://github.com/thohoh/kozlovcoin](https://github.com/thohoh/kozlovcoin)
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-KEY_PATH=~/Dropbox/AWS_keys/ec2-1.pem
+KEY_PATH=~/Dropbox/AWS/keys/ec2-1.pem
 EC2_USER=ec2-user
 REMOTE_HOST=ec2
 TAR_NAME=kozlovcoin-wallet.tar.gz

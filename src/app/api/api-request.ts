@@ -38,6 +38,6 @@ export class ApiRequest {
 
     private makeUrl(endpoint: string): string {
         const origin: string = location.origin;
-        return `${origin}/api/${this.API_VERSION}/${endpoint}`;
+        return `${origin}/api/v${this.API_VERSION}/${endpoint}`;
     }
 }
